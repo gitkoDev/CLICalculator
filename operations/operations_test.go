@@ -1,40 +1,88 @@
 package operations
 
-import "testing"
-
-var (
-	firstOperand  float64 = 11
-	secondOperand float64 = 5.5
+import (
+	"testing"
 )
 
-func TestAdd(t *testing.T) {
-	result := firstOperand + secondOperand
+type TestData struct {
+	x, y   float64
+	result float64
+}
 
-	if result != 16.5 {
-		t.Errorf("Add(11, 5.5) FAIL. Want: %v, got: %v", 16.5, result)
+func TestAdd(t *testing.T) {
+	testData := []TestData{
+		{1, 3, 4},
+		{-5, -6, -11},
+		{1000, 0, 1000},
+		{1, 0.5, 1.5},
 	}
+
+	for _, datum := range testData {
+		result := datum.x + datum.y
+
+		if result != datum.result {
+			t.Errorf("add(%v, %v) FAILED. Want: %v, got %v", datum.x, datum.y, datum.result, result)
+		} else {
+			t.Logf("add(%v, %v) PASSED. Want: %v, got %v", datum.x, datum.y, datum.result, result)
+		}
+	}
+
 }
 
 func TestSubtract(t *testing.T) {
-	result := firstOperand - secondOperand
-
-	if result != 5.5 {
-		t.Errorf("Subtract(11, 5.5) FAIL. Want: %v, got: %v", 5.5, result)
+	testData := []TestData{
+		{1, 3, -2},
+		{5, -6, 11},
+		{1000, 0, 1000},
+		{4, 2.5, 1.5},
 	}
+
+	for _, datum := range testData {
+		result := datum.x - datum.y
+
+		if result != datum.result {
+			t.Errorf("subtract(%v, %v) FAILED. Want: %v, got %v", datum.x, datum.y, datum.result, result)
+		} else {
+			t.Logf("subtract(%v, %v) PASSED. Want: %v, got %v", datum.x, datum.y, datum.result, result)
+		}
+	}
+
 }
 
 func TestMultiply(t *testing.T) {
-	result := firstOperand * secondOperand
+	testData := []TestData{
+		{1, 3, 3},
+		{5, -6, -30},
+		{1000, 1000, 1000000},
+		{4, -2.5, -10},
+	}
 
-	if result != 60.5 {
-		t.Errorf("Mutiply(11, 5.5) FAIL. Want: %v, got: %v", 60.5, result)
+	for _, datum := range testData {
+		result := datum.x * datum.y
+
+		if result != datum.result {
+			t.Errorf("multiply(%v, %v) FAILED. Want: %v, got %v", datum.x, datum.y, datum.result, result)
+		} else {
+			t.Logf("multiply(%v, %v) PASSED. Want: %v, got %v", datum.x, datum.y, datum.result, result)
+		}
 	}
 }
 
 func TestDivide(t *testing.T) {
-	result := firstOperand / secondOperand
+	testData := []TestData{
+		{1, 3, 0.3333333333333333},
+		{15, -5, -3},
+		{1000, 1000, 1},
+		{4, 2, 2},
+	}
 
-	if result != 2 {
-		t.Errorf("Divide(11, 5.5) FAIL. Want: %v, got: %v", 2, result)
+	for _, datum := range testData {
+		result := datum.x / datum.y
+
+		if result != datum.result {
+			t.Errorf("divide(%v, %v) FAILED. Want: %v, got %v", datum.x, datum.y, datum.result, result)
+		} else {
+			t.Logf("divide(%v, %v) PASSED. Want: %v, got %v", datum.x, datum.y, datum.result, result)
+		}
 	}
 }
